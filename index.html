@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jogo da Velha</title>
+    <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>Jogo da Velha</h1>
+    </header>
+    <div class="modo-jogo">
+        <button id="singleplayer">1 Jogador</button>
+        <button id="multiplayer">2 Jogadores</button>
+    </div>
+    <main>
+        <div id="posicao-tabela">
+            <table>
+                <tr>
+                    <td class="quadrado" id="qdr1" style="border-right: 8px solid black;"></td>
+                    <td class="quadrado" id="qdr2" style="border-right: 8px solid black;"></td>
+                    <td class="quadrado"id="qdr3"></td>
+                </tr>
+                <tr style="border-top: 8px solid black;">
+                    <td class="quadrado"id="qdr4"></td>
+                    <td class="quadrado" id="qdr5" style="border: 8px solid black;"></td>
+                    <td class="quadrado"id="qdr6"></td>
+                </tr>
+                <tr style="border-top: 8px solid black;">
+                    <td class="quadrado" id="qdr7" style="border-right: 8px solid black;"></td>
+                    <td class="quadrado" id="qdr8" style="border-right: 8px solid black;"></td>
+                    <td class="quadrado"id="qdr9"></td>
+                </tr>
+            </table>
+        </div>
+    </main>
+    <section>
+        <h2>Placar:</h2>
+        <span>&#x274C;:<p id="res-x">0</p></span>
+        <span>&#11093;:<p id="res-o">0</p></span>
+    </section>
+    <footer>
+        <p>@gigabytemortein</p>
+    </footer>
+
+    <script src="script copy.js"></script>
+</body>
+</html>

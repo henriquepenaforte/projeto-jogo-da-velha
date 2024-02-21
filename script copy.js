@@ -1,0 +1,236 @@
+const x = '&#x274C;';
+const o = '&#11093;';
+
+let contador = 0;
+let quadrado = document.querySelectorAll('.quadrado');
+let check = document.querySelector('#posicao-tabela');
+let resX = document.querySelector('#res-x');
+let resO = document.querySelector('#res-o');
+let vitX = 0;
+let vitO = 0;
+let vencedor = false;
+const q = {
+    q1: document.getElementById('qdr1'),
+    q2: document.getElementById('qdr2'),
+    q3: document.getElementById('qdr3'),
+    q4: document.getElementById('qdr4'),
+    q5: document.getElementById('qdr5'),
+    q6: document.getElementById('qdr6'),
+    q7: document.getElementById('qdr7'),
+    q8: document.getElementById('qdr8'),
+    q9: document.getElementById('qdr9'),
+}
+
+//selecionando modo jogo
+const but1 = document.querySelector('#singleplayer');
+const but2 = document.querySelector('#multiplayer');
+let botAtivado = false;
+
+but1.addEventListener('click', function() {
+    botAtivado = true;
+    apagaPartida();
+});
+but2.addEventListener('click', function() {
+    botAtivado = false;
+    apagaPartida();
+});
+
+//verificando se deu velha
+check.addEventListener('click', function () {
+    setTimeout(deuVelha(),1000);
+});
+
+//iteração para adicionar eventListeners a todos os td da table
+for (let i in quadrado) {
+    quadrado[i].addEventListener('click', function() {
+        vez(i);
+        fimPartida()
+    })
+}
+
+//funções para marcar e alternar a vez
+function marcaCirculo (i) {
+    quadrado[i].innerHTML = o;
+    quadrado[i].classList.add('o');
+}
+
+function marcaX (i) {
+    quadrado[i].innerHTML = x;
+    quadrado[i].classList.add('x')
+}
+
+function vez (i) { 
+    if (quadrado[i].innerHTML.length !== 0) {
+        return alert('Quadrado já marcado');
+    }
+    if (botAtivado == false) {
+        contador++;
+        if (contador % 2 == 0) {
+            marcaCirculo(i)
+        } else {
+            marcaX(i)
+        }
+    } else {
+        if (contador % 2 == 0) {
+            contador++;
+            marcaX(i)
+        }
+        bot()
+    }
+    
+}
+
+//funcionalidade do bot
+function aleatorio () {
+    let aleatorio = Math.round(Math.random() * 9) 
+    if (aleatorio == 0) {
+            return aleatorio + 1
+        } else {
+            return aleatorio
+        }
+}
+
+function bot () {
+    if (botAtivado === false) {
+        return
+    } else {
+        let a = aleatorio();
+        while (quadrado[a].innerHTML.length !== 0) {
+            a = aleatorio()
+        }
+        contador++
+        quadrado[a].classList.add('o')
+        return quadrado[a].innerHTML = o;
+    }
+}
+
+//condicionais de vitoria (sim, exagero de if's)
+function fimPartida () { 
+   vitoriaO();
+   vitoriaX();
+}
+
+function vitoriaX () {
+    if (q.q1.classList.contains('x') && q.q2.classList.contains('x') && q.q3.classList.contains('x')) {
+        alert(`Vitória do ${q.q1.innerHTML}`);
+        vencedor = true;
+        zeraPartida();
+    } else if (q.q4.classList.contains('x') && q.q5.classList.contains('x') && q.q6.classList.contains('x')) {
+        alert(`Vitória do ${q.q4.innerHTML}`);
+        vencedor = true;
+        zeraPartida();
+    } else if (q.q7.classList.contains('x') && q.q8.classList.contains('x') && q.q9.classList.contains('x')) {
+        alert(`Vitória do ${q.q7.innerHTML}`);
+        vencedor = true;
+        zeraPartida();
+    } else if (q.q1.classList.contains('x') && q.q4.classList.contains('x') && q.q7.classList.contains('x')) {
+        alert(`Vitória do ${q.q1.innerHTML}`);
+        vencedor = true;
+        zeraPartida();
+    } else if (q.q2.classList.contains('x') && q.q5.classList.contains('x') && q.q8.classList.contains('x')) {
+        alert(`Vitória do ${q.q2.innerHTML}`);
+        vencedor = true;
+        zeraPartida();
+    } else if (q.q3.classList.contains('x') && q.q6.classList.contains('x') && q.q9.classList.contains('x')) {
+        alert(`Vitória do ${q.q3.innerHTML}`);
+        vencedor = true;
+        zeraPartida();
+    } else if (q.q1.classList.contains('x') && q.q5.classList.contains('x') && q.q9.classList.contains('x')) {
+        alert(`Vitória do ${q.q1.innerHTML}`);
+        vencedor = true;
+        zeraPartida();
+    } else if (q.q3.classList.contains('x') && q.q5.classList.contains('x') && q.q7.classList.contains('x')) {
+        alert(`Vitória do ${q.q3.innerHTML}`);
+        vencedor = true;
+        zeraPartida();
+    }
+}
+
+function vitoriaO () {
+    if (q.q1.classList.contains('o') && q.q2.classList.contains('o') && q.q3.classList.contains('o')) {
+        alert(`Vitória do ${q.q1.innerHTML}`);
+        vencedor = true;
+        zeraPartida();
+    } else if (q.q4.classList.contains('o') && q.q5.classList.contains('o') && q.q6.classList.contains('o')) {
+        alert(`Vitória do ${q.q4.innerHTML}`);
+        vencedor = true;
+        zeraPartida();
+    } else if (q.q7.classList.contains('o') && q.q8.classList.contains('o') && q.q9.classList.contains('o')) {
+        alert(`Vitória do ${q.q7.innerHTML}`);
+        vencedor = true;
+        zeraPartida();
+    } else if (q.q1.classList.contains('o') && q.q4.classList.contains('o') && q.q7.classList.contains('o')) {
+        alert(`Vitória do ${q.q1.innerHTML}`);
+        vencedor = true;
+        zeraPartida();
+    } else if (q.q2.classList.contains('o') && q.q5.classList.contains('o') && q.q8.classList.contains('o')) {
+        alert(`Vitória do ${q.q2.innerHTML}`);
+        vencedor = true;
+        zeraPartida();
+    } else if (q.q3.classList.contains('o') && q.q6.classList.contains('o') && q.q9.classList.contains('o')) {
+        alert(`Vitória do ${q.q3.innerHTML}`);
+        vencedor = true;
+        zeraPartida();
+    } else if (q.q1.classList.contains('o') && q.q5.classList.contains('o') && q.q9.classList.contains('o')) {
+        alert(`Vitória do ${q.q1.innerHTML}`);
+        vencedor = true;
+        zeraPartida();
+    } else if (q.q3.classList.contains('o') && q.q5.classList.contains('o') && q.q7.classList.contains('o')) {
+        alert(`Vitória do ${q.q3.innerHTML}`);
+        vencedor = true;
+        zeraPartida();
+    }
+}
+
+function deuVelha() {
+    if (contador >= 9 && vencedor == false) {
+        alert ('Deu velha!')
+        return apagaPartida();
+    }
+}
+
+function zeraPartida () {
+        if (botAtivado) {
+            if (contador % 2 !== 0) {
+                vitO++;
+                resO.innerHTML = vitO; 
+            } else {
+                vitX++;
+                resX.innerHTML = vitX;
+            }
+        } else {
+            if (contador % 2 == 0) {
+                vitO++;
+                resO.innerHTML = vitO; 
+            } else {
+                vitX++;
+                resX.innerHTML = vitX;
+            }
+        }
+    apagaPartida();
+}
+
+//limpa a tela na troca de modo de jogo ou na vitoria de alguem
+function apagaPartida () {
+    contador = 0;
+    for(let i in quadrado) {
+        quadrado[i].innerHTML = '';
+        quadrado[i].classList.remove('x');
+        quadrado[i].classList.remove('o');
+    }
+}
+
+/* 
+    1 2 3
+    4 5 6
+    7 8 9
+
+    possibilidades de vitoria:
+    123, 456, 789, 147, 258, 369, 159, 357
+    012  345  678  036  147  258  048  246
+
+    qArr = [q1,q2,q3,q4,q5,q6,q7,q8,q9]
+    if (qArr[])
+    
+//const possibilidades = [123, 456, 789, 147, 258, 369, 159, 357]
+*/
